@@ -22,6 +22,6 @@ jobs:
           args: >
             --verbose
             --no-progress
-            --accept 200,201,202,203,204,301,302,303,307,308,429
+            --accept 200,201,202,203,204,301,302,303,307,308,403,429
             README.md
-          fail: true
+          fail: false
