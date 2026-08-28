@@ -1,0 +1,27 @@
+name: Link Check
+
+on:
+  schedule:
+    # हर सोमवार सुबह 6:00 बजे (UTC) = सुबह 11:30 बजे IST
+    - cron: "0 6 * * 1"
+  workflow_dispatch: {}   # मैन्युअल ट्रिगर के लिए भी उपलब्ध
+  pull_request:
+    paths:
+      - "README.md"
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check links in README
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >
+            --verbose
+            --no-progress
+            --accept 200,201,202,203,204,301,302,303,307,308,429
+            README.md
+          fail: true
